@@ -50,21 +50,58 @@ nav ul li a:hover {
     border: 2px solid black;
 }
 
-.reservations {
-    margin-bottom: 20px;
+.aboutMenuContainer {
+    display: flex;
 }
 
-.contactUs h2 {
+.about {
+    flex: 1;
+    padding: 0px 50px;
+    /*padding: 40px;
+    width: 50%;*/
+}
+
+.menu {
+    flex: 1;
+    padding: 0px 50px;
+    /*: 50%;
+    padding: 40px;*/
+}
+
+.about h1 {
+    text-align: center;
+    margin: 20px 0px 10px 0px;
+}
+
+.enlargedLetter {
+    float: left;
+    font-size: 120px;
+    font-family: Brush Script MT, Brush Script Std, cursive;
+    margin-right: 20px;
+}
+
+.about p {
+    font-size: 18px;
+}
+
+.menu h1 {
+    text-align: center;
+    margin: 20px 0px 10px 0px;
+}
+
+.menu h2 {
     margin-bottom: 10px;
 }
 
-.contactUs form {
-    margin: 15px 0px;
+.menu ol {
+    margin-left: 50px;
 }
 
-.submitButton {
-    font-size: 25px;
-    padding: 8px 40px;
+.menu ol li {
+    font-size: 18px;
+    font-weight: bold;
+    font-style: italic;
+    margin-bottom: 5px;
 }
 
 footer {
