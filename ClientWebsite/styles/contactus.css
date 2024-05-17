@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+    margin: 20px;
+    background-color: #8AC7DB;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    margin: 20px 0px;
+}
+
+nav h1 {
+    margin-right: 40px;
+    font-size: 50px;
+}
+
+nav ul {
+    display: flex;
+}
+
+nav ul li {
+    list-style: none;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    list-style: none;
+    margin: 10px 20px 10px 0px;
+    padding: 30px 50px;
+    background-color: #5a627d;
+    border-radius: 20px;
+    border: 2px solid #5a627d;
+}
+
+nav ul li a:hover {
+    color: black;
+    border: 2px solid black;
+}
+
+.reservations {
+    margin: 20px 0px;
+}
+
+.reservations h1 {
+    color: #546B72;
+}
+
+.contactUs h2 {
+    color: #546B72;
+    margin-bottom: 10px;
+}
+
+.contactUs form {
+    margin: 15px 0px;
+}
+
+.submitButton {
+    font-size: 25px;
+    padding: 8px 40px;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #5a627d;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+}
+
+footer span {
+    margin: 0px 15px;
+}
