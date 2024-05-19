@@ -50,6 +50,22 @@ nav ul li a:hover {
     border: 2px solid black;
 }
 
+.resHeader {
+    margin-bottom: 20px;
+}
+
+.reservations h2 {
+    margin-bottom: 10px;
+}
+
+.reservations form {
+    margin: 15px 0px;
+}
+
+.submitButton {
+    font-size: 25px;
+    padding: 8px 40px;
+} 
 
 footer {
     position: fixed;
