@@ -4,6 +4,7 @@ const Reservation = require('../models/reservation');
 
 // Create -----------------------------------------------
 router.post('/', async (req, res) => {
+  console.log(req.body);
   try {
     const reservation = new Reservation(req.body);
     await reservation.save();
@@ -68,3 +69,6 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+// Routes -----------------------------------------------
+module.exports = router;

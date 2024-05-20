@@ -24,7 +24,7 @@
         <section class="reservations">
             <h2>Make a Reservation</h2>
             <p>Reserve a table at Relaxing Koala and experience the best of Asian fusion cuisine. Whether you're planning a romantic dinner for two, a family celebration, or a business lunch, we look forward to welcoming you. Please fill out the form below to make a reservation.</p>
-            <form action="Reservations.html" method="post">
+            <form id = "reservation-form">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required minlength="6"><br><br>
                 <label for="email">Email:</label>
@@ -32,13 +32,13 @@
                 <label for="phone">Phone:</label>
                 <input type="tel" id="phone" name="phone" required><br><br>
                 <label for="date">Date:</label>
-                <input type="date" id="date" name="date" required><br><br>
+                <input type="date" id="date" name="date" ><br><br>
                 <label for="time">Time:</label>
-                <input type="time" id="time" name="time" required><br><br>
+                <input type="time" id="time" name="time" ><br><br>
                 <label for="guests">Number of Guests:</label>
                 <input type="number" id="guests" name="guests" required><br><br>
                 <label for="specialRequests">Special Requests:</label><br>
-                <textarea id="specialRequests" name="specialRequests" rows="4" cols="50"></textarea><br><br>
+                <textarea id="message" name="specialRequests" rows="4" cols="50"></textarea><br><br>
                 <input class="submitButton" type="submit" value="Submit">
             </form>
         </section>
@@ -52,5 +52,6 @@
             <span>Follow us on social media!</span>
             <span>&copy; 2024 Relaxing Koala</span>
         </footer>
+    <script src="js/reservations.js"></script>
     </body>
 </html>

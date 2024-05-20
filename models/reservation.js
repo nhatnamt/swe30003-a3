@@ -1,15 +1,11 @@
 const mongoose = require('mongoose');
 
 const reservationSchema = new mongoose.Schema({
-    id: {
-        type: Number,
-        required: true
-    },
+    // id: {
+    //     type: Number,
+    //     required: true
+    // },
     name: {
-        type: String,
-        required: true
-    },
-    phone: {
         type: String,
         required: true
     },
@@ -17,13 +13,17 @@ const reservationSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    phone: {
+        type: String,
+        required: true
+    },
     date: {
         type: Date,
-        required: true
+        //required: true
     },
     time: {
         type: String,
-        required: true
+        //required: true
     },
     guests: {
         type: Number,
@@ -31,6 +31,9 @@ const reservationSchema = new mongoose.Schema({
     },
     message: {
         type: String,
-        required: true
+        //required: true
     },
     });
+
+const Reservation = mongoose.model('Reservation', reservationSchema);
+module.exports = Reservation;
