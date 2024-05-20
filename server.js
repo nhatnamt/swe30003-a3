@@ -31,7 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Point to homepage
 app.get('/', (req,res) => {
-  res.sendFile(path.join(__dirname, 'public', 'Homepage.html'));
+  res.sendFile(path.join(__dirname, 'public', 'FOH.html'));
 });
 
 const reservationRoutes = require('./routes/reservation');
