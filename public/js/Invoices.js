@@ -18,4 +18,25 @@ document.addEventListener('DOMContentLoaded', () => {
             body: JSON.stringify(Invoice),
         });
     });
+    app.post('/create-invoice', async (req, res) => {
+        const { orderNumber } = req.body;
+    
+        if (!orderNumber) {
+            return res.status(400).json({ error: 'Order number is required' });
+        }
+    
+        try {
+            const invoice = await Invoice.createInvoiceFromOrderNumber(orderNumber);
+            res.status(201).json(invoice);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+        await fetch('http://localhost:3000/api/Incoices', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(Invoice),
+        });
+    });
 });
