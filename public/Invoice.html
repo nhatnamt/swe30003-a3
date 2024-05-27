@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Homepage</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="ProcessPayment">
+        <meta name="keywords" content="RelaxingKoala">
+        <link rel="stylesheet" href=""">
+    </head>
+    <body>
+        <nav>
+            <!--navigation bar -->
+            <h1>Relaxing Koala</h1>
+            <ul>
+                <li><a href="Kitchen.html">Kitchen</a></li>
+                <li><a href="FOH.html">Front Desk</a></li>
+                <li><a href="ReservationStaff.html">Reservations</a></li>
+                <li><a href="Invoice.html">Invoice</a></li>
+            </ul>
+        </nav>
+        <div class="resHeader">
+            <h1>Create Invoice</h1>
+        </div>
+        <section class="">
+            <form id = "Invoice-form">
+                <label for="OrderNumber">Order Number: </label>
+                <input type="text" id="OrderNumber" name="OrderNumber" required><br><br>
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required><br><br>
+                <label for="time">Time:</label>
+                <input type="time" id="time" name="time" required><br><br>
+                <label for="CustomerName">Customer Name:</label>
+                <input type="text" id="CustomerName" name="CustomerName"><br><br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email"><br><br>
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone"><br><br>
+                <input class="submitButton" type="submit" value="Submit">
+            </form>
+        </section>
+        <script src="js/Invoice.js"></script>
+    </body>
+    </html>
+        
