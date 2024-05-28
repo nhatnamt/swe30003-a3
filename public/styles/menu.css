@@ -69,3 +69,16 @@ footer {
 footer span {
     margin: 0px 15px;
 }
+
+table {
+    border: 1px solid #546B72;
+    width: 100%;
+    margin: 20px 0px;
+    border-collapse: collapse; /* Add this line */
+}
+th, td {
+    border: 1px solid #546B72;
+    padding: 8px;
+    text-align: center;
+}
+

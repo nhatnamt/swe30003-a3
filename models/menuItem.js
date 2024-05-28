@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const menuItemSchema = new mongoose.Schema({
     id: {
-        type: Number,
+        type: String,
         required: true
     },
     name: {
@@ -19,6 +19,7 @@ const menuItemSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        default: ''
     },
     });
+    
+module.exports = mongoose.model('MenuItem', menuItemSchema);

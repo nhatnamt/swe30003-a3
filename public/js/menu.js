@@ -3,11 +3,29 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('http://localhost:3000/api/menu')
         .then(response => response.json())
         .then(menuItems => {
-            const menuList = document.getElementById('menu-list');
+            const menuTable = document.getElementById('menu-table').getElementsByTagName('tbody')[0];
+
+            // create table rows for each menu item
             menuItems.forEach(menuItem => {
-                const menuItemElement = document.createElement('li');
-                menuItemElement.textContent = menuItem.name;
-                menuList.appendChild(menuItemElement);
+                const menuItemRow = document.createElement('tr');
+
+                const idCell = document.createElement('td');
+                idCell.textContent = menuItem.id;
+                menuItemRow.appendChild(idCell);
+
+                const nameCell = document.createElement('td');
+                nameCell.textContent = menuItem.name;
+                menuItemRow.appendChild(nameCell);
+
+                const descriptionCell = document.createElement('td');
+                descriptionCell.textContent = menuItem.description;
+                menuItemRow.appendChild(descriptionCell);
+
+                const priceCell = document.createElement('td');
+                priceCell.textContent = menuItem.price;
+                menuItemRow.appendChild(priceCell);
+
+                menuTable.appendChild(menuItemRow);
             });
         });
 
