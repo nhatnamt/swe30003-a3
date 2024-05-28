@@ -40,6 +40,9 @@ app.use('/api/reservations', reservationRoutes);
 const orderRoutes = require('./routes/order');
 app.use('/api/orders', orderRoutes);
 
+const menuRoutes = require('./routes/menu');
+app.use('/api/menu', menuRoutes);
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

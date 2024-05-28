@@ -19,6 +19,6 @@ const menuItemSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        required: true
+        default: ''
     },
     });
