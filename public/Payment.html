@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Homepage</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="ProcessPayment">
+        <meta name="keywords" content="RelaxingKoala">
+        <link rel="stylesheet" href=""">
+    </head>
+    <body>
+        <nav>
+            <!--navigation bar -->
+            <h1>Relaxing Koala</h1>
+            <ul>
+                <li><a href="Kitchen.html">Kitchen</a></li>
+                <li><a href="FOH.html">Front Desk</a></li>
+                <li><a href="ReservationStaff.html">Reservations</a></li>
+                <li><a href="Invoice.html">Invoice</a></li>
+                <li><a href="Payment.html">Payment</a></li>
+            </ul>
+        </nav>
+        <div class="resHeader">
+            <h1>Create Invoice</h1>
+        </div>
+        <section class="">
+            <form id="ProcessPaymentForm">
+                <label for="orderNumber">Order Number:</label>
+                <input type="text" id="orderNumber" name="orderNumber" required>
+                <button type="button" onclick="showPaymentForm()">Process Payment</button>
+            </form>
+        
+            <div id="paymentForm" class="hidden">
+                <h2>Payment Information</h2>
+                <form>
+                    <label for="orderNumberDisplay">Order Number:</label>
+                    <input type="text" id="orderNumberDisplay" name="orderNumberDisplay" readonly><br>
+        
+                    <label for="amount">Amount:</label>
+                    <input type="text" id="amount" name="amount" value="TotalPayable" readonly><br>
+        
+                    <label for="cardNumber">Credit Card Number:</label>
+                    <input type="text" id="cardNumber" name="cardNumber" required><br>
+                    
+                    <label for="cardHolder">Card Holder:</label>
+                    <input type="text" id="cardHolder" name="cardHolder" required><br>
+                    
+                    <label for="expiryDate">Expiry Date:</label>
+                    <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" required><br>
+        
+                    <label for="cvv">CVV:</label>
+                    <input type="text" id="cvv" name="cvv" required><br>
+        
+                    <button type="submit">Submit Payment</button>
+                </form>
+            </div>
+        </section>
+        <script src="js/Payment.js"></script>
+    </body>
+    </html>
+        

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Define the schema for the Invoice
-const InvoiceSchema = new mongoose.Schema({
+const invoiceSchema = new mongoose.Schema({
     Order_Number: {
         type: String,
         required: true
@@ -45,11 +45,18 @@ const InvoiceSchema = new mongoose.Schema({
 });
 
 // Define a method to calculate GST, subtotal, and total
-InvoiceSchema.methods.calculateTotals = function() {
+invoiceSchema.methods.calculateTotals = function() {
     const gstRate = 0.1; // Assuming GST rate is 10%
-    const order = this.Order;
+    const order = order.find({
+        Order_Number: this.Order_Number
+    })
 
     let subtotal = 0;
+    const orderItems = this.Order.items;
+
+    for (const item of orderItems) {
+        subtotal += item.price * item.quantity;
+    }
     for (const item of order.items) {
         subtotal += item.price * item.quantity;
     }
@@ -63,7 +70,7 @@ InvoiceSchema.methods.calculateTotals = function() {
 };
 
 // Static method to create an invoice by fetching order details
-InvoiceSchema.statics.createInvoiceFromOrderNumber = async function(orderNumber) {
+invoiceSchema.statics.createInvoiceFromOrderNumber = async function(orderNumber) {
     // Assuming you have an Order model to fetch order details
     const Order = mongoose.model('Order');
     const orderDetails = await Order.findOne({ Order_Number: orderNumber });
@@ -80,6 +87,7 @@ InvoiceSchema.statics.createInvoiceFromOrderNumber = async function(orderNumber)
         Customer_Email: orderDetails.Customer_Email,
         Customer_Contact_Number: orderDetails.Customer_Contact_Number,
         Order: orderDetails,
+        Total_Payable: totalPayable,
         message: 'Thank you for your purchase!'
     });
 
@@ -89,5 +97,5 @@ InvoiceSchema.statics.createInvoiceFromOrderNumber = async function(orderNumber)
     return invoice;
 };
 
-const Invoice = mongoose.model('Invoice', InvoiceSchema);
-module.exports = Invoice;
+const invoice = mongoose.model('invoice', InvoiceSchema);
+module.exports = invoice;
