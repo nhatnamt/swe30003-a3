@@ -1,5 +1,5 @@
-const invoice = require("../../models/Invoice");
-const Invoice = require("../../models/Invoice");
+import invoice from "../../models/invoice";
+import { createInvoiceFromOrderNumber } from "../../models/invoice";
 
 document.addEventListener('DOMContentLoaded', () => {
     form = document.getElementById('invoice-form');
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     
         try {
-            const invoice = await Invoice.createInvoiceFromOrderNumber(orderNumber);
+            const invoice = await createInvoiceFromOrderNumber(orderNumber);
             res.status(201).json(invoice);
         } catch (error) {
             res.status(500).json({ error: error.message });
