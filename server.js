@@ -37,6 +37,9 @@ app.get('/', (req,res) => {
 const reservationRoutes = require('./routes/reservation');
 app.use('/api/reservations', reservationRoutes);
 
+const orderRoutes = require('./routes/order');
+app.use('/api/orders', orderRoutes);
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
