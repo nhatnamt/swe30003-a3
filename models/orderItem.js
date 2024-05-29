@@ -1,21 +1,20 @@
 const mongoose = require('mongoose');
-const MenuItem = require('./menuItem');
+const MenuItemSchema = require('./menuItem');
 
-const orderItemSchema = new mongoose.Schema({
-    menuItem: {
-        type: MenuItem,
-        required: true
-    },
-    quantity: {
-        type: Number,
-        required: true
-    },
-    amount: {
-        type: Number,
-        required: true
-    },
-    note: {
-        type: String,
-        default: ''
-    }
+var orderItemSchema = new mongoose.Schema({
+  quantity: {
+    type: Number,
+    required: true
+  },
+  amount: {
+    type: Number,
+    required: true
+  },
+  note: {
+    type: String,
+    default: ''
+  }
 });
+
+MenuItemSchema.discriminator('orderItem', orderItemSchema);
+module.exports = mongoose.model('orderItem');

@@ -15,11 +15,10 @@ const menuItemSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: true
     },
     category: {
         type: String,
     },
     });
     
-module.exports = mongoose.model('MenuItem', menuItemSchema);
+module.exports = mongoose.model('menuItem', menuItemSchema);

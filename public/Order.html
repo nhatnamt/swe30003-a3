@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Order</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="Kitchen">
+        <meta name="keywords" content="RelaxingKoala">
+        <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg bg-light">
+            <!--navigation bar -->
+            <h1>Relaxing Koala</h1>
+            <ul>
+                <li><a href="Kitchen.html">Kitchen</a></li>
+                <li><a href="FOH.html">Front Desk</a></li>
+                <li><a href="Menu.html">Menu</a></li>
+            </ul>
+        </nav>
+        <div class="bg-light m-5 p-2">
+            <h2 class="mb-3">Place an order</h2>
+            <label for="id">Order ID:</label>
+            <input type="text" id="order-id" name="id" required><br><br>
+            <label for="table-number">Table Number:</label>
+            <input type="text" id="table-number" name="table-number" required><br><br>
+            <table id="order-table" class="table table-bordered">
+                <thead>
+                    <tr>
+                    <th>ID</th>
+                    <th>Qty</th>
+                    <th>Note</th>
+                    <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <button id="add-row" class="btn btn-primary">Add Row</button>
+            <button id="submit" class="btn btn-primary">Submit</button>
+        </div>
+        
+        <script src="js/order.js"></script>
+    </body>
+    </html>
+        
