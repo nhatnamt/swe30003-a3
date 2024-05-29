@@ -68,6 +68,7 @@ router.get('/', async (req, res) => {
 
 // get order by status
 router.get('/:status', async (req, res) => {
+
     console.log(req.params.status);
     try {
       const orders = await Order.find({ status: req.params.status });
@@ -77,7 +78,20 @@ router.get('/:status', async (req, res) => {
     }
   });
 // Update -----------------------------------------------
-
+// update order status
+router.patch('/:id', async (req, res) => {
+    try {
+      const order = await Order.findOne({ orderID: req.params.id });
+      if (!order) {
+        return res.status(404).json({ message: 'Order not found' });
+      }
+      order.status = req.body.status;
+      await order.save();
+      res.json({ message: 'Order updated successfully', order });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  });
 // Delete -----------------------------------------------
 
 
