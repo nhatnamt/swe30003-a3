@@ -25,6 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 priceCell.textContent = menuItem.price;
                 menuItemRow.appendChild(priceCell);
 
+                const categoryCell = document.createElement('td');
+                categoryCell.textContent = menuItem.category;
+                menuItemRow.appendChild(categoryCell);
+
                 menuTable.appendChild(menuItemRow);
             });
         });

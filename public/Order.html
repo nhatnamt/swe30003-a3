@@ -3,27 +3,38 @@
     <head>
         <title>Order</title>
         <meta charset="UTF-8">
-        <meta name="description" content="Kitchen">
+        <meta name="description" content="Order">
         <meta name="keywords" content="RelaxingKoala">
         <link rel="stylesheet" href="styles/style.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg bg-light">
+        <nav class="navbar navbar-expand-lg bg-light py-3">
             <!--navigation bar -->
-            <h1>Relaxing Koala</h1>
-            <ul>
-                <li><a href="Kitchen.html">Kitchen</a></li>
-                <li><a href="FOH.html">Front Desk</a></li>
-                <li><a href="Menu.html">Menu</a></li>
+            <h1 class="navbar-brand">Relaxing Koala</h1>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link mx-2" href="FOH.html">Front Desk <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link mx-2" href="Kitchen.html">Kitchen <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-2" href="Menu.html">Menu <span class="sr-only">(current)</span></a>
+                </li>
             </ul>
         </nav>
-        <div class="bg-light m-5 p-2">
+        <div class="bg-light mt-5 p-3 container">
             <h2 class="mb-3">Place an order</h2>
-            <label for="id">Order ID:</label>
-            <input type="text" id="order-id" name="id" required><br><br>
-            <label for="table-number">Table Number:</label>
-            <input type="text" id="table-number" name="table-number" required><br><br>
+            <div class="form-group w-25">
+                <label for="table-number">Table Number:</label>
+                <input type="text" class="form-control" id="order-id" name="id" required>
+            </div>
+            <div class="form-group w-25">
+                <label for="id">Order ID:</label>
+                <input type="text" class="form-control" id="table-number" name="table-number" required>
+            </div>
+            
             <table id="order-table" class="table table-bordered">
                 <thead>
                     <tr>
