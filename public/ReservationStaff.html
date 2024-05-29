@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Order</title>
+        <title>Reservation</title>
         <meta charset="UTF-8">
         <meta name="description" content="FOH">
         <meta name="keywords" content="RelaxingKoala">
@@ -24,30 +24,67 @@
                 </li>
             </ul>
         </nav>
-        <div class="resHeader">
-            <h1>Reservations</h1>
+        <div class="container-fluid w-75 mx-auto">
+            <div class="row">
+                <div class="mt-5 p-4 bg-light rounded col-4 float-left h-100">
+                    <h2>Make a Reservation</h2>
+                    <p class="fst-italic text-muted">Reserve a table at Relaxing Koala and experience the best of Asian fusion cuisine. 
+                        Whether you're planning a romantic dinner for two, a family celebration, or a business lunch, we look forward to welcoming you. 
+                        Please fill out the form below to make a reservation.
+                    </p>
+                    <form id = "reservation-form">
+                        <div class = "form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" required minlength="6">
+                        </div>
+                        <div class = "form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class = "form-group">
+                            <label for="phone">Phone:</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" required>
+                        </div>
+                        <div class = "form-group">
+                            <label for="date">Date:</label>
+                            <input type="date" class="form-control" id="date" name="date" required>
+                        </div>
+                        <div class = "form-group">
+                            <label for="time">Time:</label>
+                            <input type="time" class="form-control" id="time" name="time" required>
+                        </div>
+                        <div class = "form-group">
+                            <label for="guests">Number of Guests:</label>
+                            <input type="number" class="form-control" id="guests" name="guests" required>
+                        </div>
+                        <div class = "form-group">
+                            <label for="specialRequests">Special Requests:</label>
+                            <textarea class="form-control" id="message" name="specialRequests" rows="4" cols="50"></textarea>
+                        </div>
+                        <input class="btn btn-primary" type="submit" value="Create">
+                        <button id="update" class="btn btn-primary" type="button">Save</button>
+                        <button class="btn btn-secondary float-right" type="button" onclick="clearForm()">Clear</button>
+                    </form>
+                </div>
+                <div class="mt-5 ml-3 p-4 bg-light rounded col float-left h-100">
+                    <h2 class="text-center mb-3">Reservation List</h2>
+                    <table id="res-table" class="table table-bordered">
+                        <thead>
+                            <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        <section class="reservations">
-            <h2>Make a Reservation</h2>
-            <p>Reserve a table at Relaxing Koala and experience the best of Asian fusion cuisine. Whether you're planning a romantic dinner for two, a family celebration, or a business lunch, we look forward to welcoming you. Please fill out the form below to make a reservation.</p>
-            <form id = "reservation-form">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required minlength="6"><br><br>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required ><br><br>
-                <label for="phone">Phone:</label>
-                <input type="tel" id="phone" name="phone" required><br><br>
-                <label for="date">Date:</label>
-                <input type="date" id="date" name="date" ><br><br>
-                <label for="time">Time:</label>
-                <input type="time" id="time" name="time" ><br><br>
-                <label for="guests">Number of Guests:</label>
-                <input type="number" id="guests" name="guests" required><br><br>
-                <label for="specialRequests">Special Requests:</label><br>
-                <textarea id="message" name="specialRequests" rows="4" cols="50"></textarea><br><br>
-                <input class="submitButton" type="submit" value="Submit">
-            </form>
-        </section>
+        
         <script src="js/reservations.js"></script>
     </body>
     </html>

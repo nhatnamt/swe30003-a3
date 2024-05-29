@@ -1,6 +1,63 @@
 document.addEventListener('DOMContentLoaded', () => {
     form = document.getElementById('reservation-form');
+    const resTable = document.getElementById('res-table').getElementsByTagName('tbody')[0];
 
+    // get all menu items
+    fetch('http://localhost:3000/api/reservations')
+        .then(response => response.json())
+        .then(resItems => {
+            // create table rows for each menu item
+            resItems.forEach(resItems => {
+                const newRow = document.createElement('tr');
+
+                const nameCell = document.createElement('td');
+                nameCell.textContent = resItems.name;
+                newRow.appendChild(nameCell);
+
+                const phoneCell = document.createElement('td');
+                phoneCell.textContent = resItems.phone;
+                newRow.appendChild(phoneCell);
+
+                const dateCell = document.createElement('td');
+                dateCell.textContent = resItems.date.substring(0, 10);
+                newRow.appendChild(dateCell);
+
+                const timeCell = document.createElement('td');
+                timeCell.textContent = resItems.time;
+                newRow.appendChild(timeCell);
+
+                // View, edit, remove button
+                const actionButton = document.createElement('td');
+                actionButton.innerHTML = '<button type="button" class="btn btn-primary btn_view btn-sm mr-1">View</button>';
+                actionButton.innerHTML += '<button type="button" class="btn btn-danger btn_remove btn-sm">X</button>';
+                newRow.appendChild(actionButton);   
+
+                resTable.appendChild(newRow);
+            });
+        });
+    
+    resTable.addEventListener('click', (event) => {
+        const name = event.target.parentElement.parentElement.getElementsByTagName('td')[0].textContent;
+        if (event.target.classList.contains('btn_remove')) {
+           fetch(`http://localhost:3000/api/reservations/${name}`, {
+               method: 'DELETE',
+           });
+            location.reload();
+        }
+        else if (event.target.classList.contains('btn_view')) {
+            // search by name through route
+            fetch(`http://localhost:3000/api/reservations/${name}`)
+                .then(response => response.json())
+                .then(reservation => {
+                    document.getElementById('name').value = reservation.name;
+                    document.getElementById('phone').value = reservation.phone;
+                    document.getElementById('date').value = reservation.date;
+                    document.getElementById('time').value = reservation.time;
+                });
+        }
+    });
+
+    // form functions
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
         const name = document.getElementById('name').value;
@@ -19,5 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             body: JSON.stringify(reservation),
         });
+        location.reload();
     });
+
+    // // update
+    // form.
 });

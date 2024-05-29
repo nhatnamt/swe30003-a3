@@ -30,9 +30,10 @@ router.get('/', async (req, res) => {
 router.get('/:name', async (req, res) => {
   try {
     const reservation = await Reservation.find({ name: req.params.name });
+    console.log(reservation);
     if (!reservation)
         return res.status(404).json({ message: 'Reservation not found' });
-    res.send(reservation);
+    res.send(reservation[0]);
   } 
   catch (error) {
     res.status(500).json({ message: error.message });
@@ -56,13 +57,10 @@ router.patch('/:id', async (req, res) => {
 });
 
 // Delete -----------------------------------------------
-// delete by id
-router.delete('/:id', async (req, res) => {
+// delete by name
+router.delete('/:name', async (req, res) => {
   try {
-    const reservation = await Reservation.findById(req.params.id);
-    if (!reservation)
-        return res.status(404).json({ message: 'Reservation not found' });
-    await reservation.delete();
+    await Reservation.deleteOne({ name: req.params.name });
     res.status(204).json();
   } 
   catch (error) {
