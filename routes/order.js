@@ -56,7 +56,26 @@ router.post('/', async (req, res) => {
   });
 
 // Read ------------------------------------------------
+// get all orders
+router.get('/', async (req, res) => {
+    try {
+      const orders = await Order.find();
+      res.send(orders);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  });
 
+// get order by status
+router.get('/:status', async (req, res) => {
+    console.log(req.params.status);
+    try {
+      const orders = await Order.find({ status: req.params.status });
+      res.send(orders);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  });
 // Update -----------------------------------------------
 
 // Delete -----------------------------------------------

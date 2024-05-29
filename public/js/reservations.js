@@ -9,29 +9,17 @@ document.addEventListener('DOMContentLoaded', () => {
             // create table rows for each menu item
             resItems.forEach(resItems => {
                 const newRow = document.createElement('tr');
-
-                const nameCell = document.createElement('td');
-                nameCell.textContent = resItems.name;
-                newRow.appendChild(nameCell);
-
-                const phoneCell = document.createElement('td');
-                phoneCell.textContent = resItems.phone;
-                newRow.appendChild(phoneCell);
-
-                const dateCell = document.createElement('td');
-                dateCell.textContent = resItems.date.substring(0, 10);
-                newRow.appendChild(dateCell);
-
-                const timeCell = document.createElement('td');
-                timeCell.textContent = resItems.time;
-                newRow.appendChild(timeCell);
+                newRow.innerHTML = `<td>${resItems.name}</td>`;
+                newRow.innerHTML += `<td>${resItems.phone}</td>`;
+                newRow.innerHTML += `<td>${resItems.date.substring(0, 10)}</td>`;
+                newRow.innerHTML += `<td>${resItems.time}</td>`;
 
                 // View, edit, remove button
                 const actionButton = document.createElement('td');
                 actionButton.innerHTML = '<button type="button" class="btn btn-primary btn_view btn-sm mr-1">View</button>';
                 actionButton.innerHTML += '<button type="button" class="btn btn-danger btn_remove btn-sm">X</button>';
-                newRow.appendChild(actionButton);   
 
+                newRow.appendChild(actionButton);   
                 resTable.appendChild(newRow);
             });
         });
