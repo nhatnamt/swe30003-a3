@@ -50,5 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             body: JSON.stringify(menuItem),
         });
+        // refresh the page
+        location.reload();
     });
 })
