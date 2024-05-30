@@ -5,25 +5,3 @@
 .navbar-brand {
     font-size: 1.7em !important;
 }
-
-.text-done {
-    color: green;
-    background-color: rgba(185, 255, 218, 0.4);
-    padding: 6px;
-    border-radius: 2px;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
-  }
-
-.text-pending {
-    color: orange;
-    background-color: rgba(241, 217, 172, 0.25);
-    padding: 6px;
-    border-radius: 2px;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
-  }

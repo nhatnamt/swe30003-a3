@@ -22,12 +22,9 @@
                 <li class="nav-item">
                     <a class="nav-link mx-2" href="Menu.html">Menu <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link mx-2" href="ContactUs.html">Feedback <span class="sr-only">(current)</span></a>
-                </li>
             </ul>
         </nav>
-        <div class="container mt-5 p-4 bg-light rounded">
+        <div class="container mt-5 p-4 bg-light">
             <header class="text-center mb-3">
                 <h2 class="">Menu</h2>
             </header>
@@ -44,37 +41,30 @@
                 <tbody>
                 </tbody>
             </table>
-        </div>
+            <br><br><br>
     
-            
-        <div class="w-50 container bg-light mt-5 p-3 rounded">
             <header class="text-center mb-3">
-                <h2 class="">Add item</h2>
+                <h2 class="">Menu Add</h2>
             </header>
-            <form id="menu-form">
-                <div class = "form-group">
-                    <label for="id">Item ID:</label>
-                    <input type="text" class="form-control" id="id" name="ID" required minlength="3">
-                </div>
-                <div class = "form-group">
+            <div >
+                <form id="menu-form">
+                    <label for="id">id:</label>
+                    <input type="text" id="id" name="ID" required minlength="3"><br><br>
                     <label for="name">Name:</label>
-                    <input type="text" class="form-control" id="name" name="name" required minlength="3">
-                </div>
-                <div class = "form-group">
-                    <label for="price">Price:</label>
-                    <input type="number" class="form-control" id="price" name="price" required>
-                </div>
-                <div class = "form-group">
-                    <label for="description">Description:</label>
-                    <textarea class="form-control" id="description" name="description" rows="4" cols="50" required></textarea>
-                </div>
-                <div class = "form-group">
+                    <input type="text" id="name" name="name" required minlength="6"><br><br>
+                    <label for="price">Price:</label>   
+                    <input type="number" id="price" name="price" required><br><br>
+                    <label for="description">Description:</label><br>
+                    <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
                     <label for="category">Category:</label>
-                    <input type="text" class="form-control" id="category" name="category">
-                </div>
-                <input class="btn btn-primary" type="submit" value="Submit">
-            </form>
+                    <input type="text" id="category" name="category"><br><br>
+                    <input class="submitButton btn btn-primary" type="submit" value="Submit">
+                </form>
+            </div>
         </div>
+
+
+        
     <script src="js/menu.js"></script>
     </body>
 </html>

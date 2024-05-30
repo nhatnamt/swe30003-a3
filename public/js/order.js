@@ -58,34 +58,5 @@ document.addEventListener('DOMContentLoaded', () => {
             body: JSON.stringify(order),
         });
     });
-
-    // load recent orders
-    const recentOrders = document.getElementById('recent-orders');
-    fetch('http://localhost:3000/api/orders')
-        .then(response => response.json())
-        .then(orders => {
-            orders.forEach(order => {
-                const orderRow = document.createElement('tr');
-                orderRow.innerHTML = `<td>${order.orderID}</td>`;
-                orderRow.innerHTML += `<td>${order.tableNumber}</td>`;
-                orderRow.innerHTML += `<td>AU$${order.totalAmount}</td>`;
-                orderRow.innerHTML += `<td>${order.date}</td>`;
-
-                const orderStatusCell = document.createElement('td');
-                const orderStatus = document.createElement('span');
-
-                orderStatus.textContent = order.status;
-                if (order.status === 'Pending') {
-                    orderStatus.classList.add('text-pending');
-                }
-                else if (order.status === 'Done') {
-                    orderStatus.classList.add('text-done');
-                }
-                orderStatusCell.appendChild(orderStatus);
-                orderRow.appendChild(orderStatusCell);
-
-                recentOrders.appendChild(orderRow);
-            });
-        });
 });
 
