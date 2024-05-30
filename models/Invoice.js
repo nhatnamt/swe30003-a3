@@ -25,7 +25,7 @@ const invoiceSchema = new mongoose.Schema({
     customerPhone: {
         type: String,
     },
-    order: {
+    orders: {
         type: [orderSchema],
         required: true
     },
@@ -46,58 +46,34 @@ const invoiceSchema = new mongoose.Schema({
     },
 });
 
-// Method to calculate GST, subtotal, and total
-invoiceSchema.methods.calculateTotals = function() {
-    const gstRate = 0.1; // Assuming GST rate is 10%
-    const order = order.find({
-        Order_Number: this.Order_Number
-    })
-
+// Method to calculate subtotal
+invoiceSchema.methods.calculateSubtotal = function() {
     let subtotal = 0;
-    const orderItems = this.Order.items;
+    const orders = this.orders;
 
-    for (const item of orderItems) {
-        subtotal += item.price * item.quantity;
-    }
-    for (const item of order.items) {
-        subtotal += item.price * item.quantity;
+    for (const order of orders) {
+        subtotal += order.totalAmount;
     }
 
-    const gst = subtotal * gstRate;
-    const totalPayable = subtotal + gst;
-
-    this.Sub_Total = subtotal;
-    this.GST = gst;
-    this.Total_Payable = totalPayable;
+    this.subtotal = subtotal;
 };
 
-// Static method to create an invoice by fetching order details
-invoiceSchema.statics.createInvoiceFromOrderNumber = async function(orderNumber) {
-    // Assuming you have an Order model to fetch order details
-    const Order = mongoose.model('Order');
-    const orderDetails = await Order.findOne({ Order_Number: orderNumber });
-
-    if (!orderDetails) {
-        throw new Error('Order not found');
-    }
-
-    const invoice = new this({
-        Order_Number: orderDetails.Order_Number,
-        date: new Date(),
-        time: new Date().toLocaleTimeString(),
-        Customer_Name: orderDetails.Customer_Name,
-        Customer_Email: orderDetails.Customer_Email,
-        Customer_Contact_Number: orderDetails.Customer_Contact_Number,
-        Order: orderDetails,
-        Total_Payable: totalPayable,
-        message: 'Thank you for your purchase!'
-    });
-
-    invoice.calculateTotals();
-    await invoice.save();
-
-    return invoice;
+// Method to calculate GST
+invoiceSchema.methods.calculateGST = function() {
+    const gstRate = 0.1; // Assuming GST rate is 10%
+    this.gst = this.subtotal * gstRate;
 };
 
-const invoice = mongoose.model('invoice', InvoiceSchema);
-module.exports = invoice;
+// Method to calculate total payable
+invoiceSchema.methods.calculateTotalPayable = function() {
+    this.totalPayable = this.subtotal + this.gst;
+};
+
+// Method to calculate totals
+invoiceSchema.methods.calculateTotals = function() {
+    this.calculateSubtotal();
+    this.calculateGST();
+    this.calculateTotalPayable();
+};
+
+module.exports = mongoose.model('Invoice', invoiceSchema);
