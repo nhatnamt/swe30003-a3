@@ -2,71 +2,77 @@ const express = require('express');
 const router = express.Router();
 const Reservation = require('../models/reservation');
 
-// Create -----------------------------------------------
-router.post('/', async (req, res) => {
-  console.log(req.body);
-  try {
-    const reservation = new Reservation(req.body);
-    await reservation.save();
-    res.status(201).json(reservation);
-  } 
-  catch (error) {
-    res.status(400).json({ message: error.message });
+class ReservationController {
+  constructor() {
+    this.router = express.Router();
+    this.initializeRoutes();
   }
-});
 
-// Read ------------------------------------------------
-// get all reservations
-router.get('/', async (req, res) => {
-  try {
-    const reservations = await Reservation.find();
-    res.send(reservations);
-  } 
-  catch (error) {
-    res.status(500).json({ message: error.message })
-  }});
-
-// get reservation by name
-router.get('/:name', async (req, res) => {
-  try {
-    const reservation = await Reservation.find({ name: req.params.name });
-    console.log(reservation);
-    if (!reservation)
-        return res.status(404).json({ message: 'Reservation not found' });
-    res.send(reservation[0]);
-  } 
-  catch (error) {
-    res.status(500).json({ message: error.message });
+  initializeRoutes() {
+    this.router.post('/', this.createReservation.bind(this));
+    this.router.get('/', this.getReservations.bind(this));
+    this.router.get('/:name', this.getReservationByName.bind(this));
+    this.router.patch('/:id', this.updateReservation.bind(this));
+    this.router.delete('/:name', this.deleteReservation.bind(this));
   }
-});
 
-// Update -----------------------------------------------
-// update by id
-router.patch('/:id', async (req, res) => {
-  try {
-    const reservation = await Reservation.findById(req.params.id);
-    if (!reservation)
-        return res.status(404).json({ message: 'Reservation not found' });
-    Object.assign(reservation, req.body);
-    await reservation.save();
-    res.send(reservation);
-  } 
-  catch (error) {
-    res.status(500).json({ message: error.message });
+  async createReservation(req, res) {
+    try {
+      console.log(req.body);
+      const reservation = new Reservation(req.body);
+      await reservation.save();
+      res.status(201).json(reservation);
+    } 
+    catch (error) {
+      res.status(400).json({ message: error.message });
+    }
   }
-});
 
-// Delete -----------------------------------------------
-// delete by name
-router.delete('/:name', async (req, res) => {
-  try {
-    await Reservation.deleteOne({ name: req.params.name });
-    res.status(204).json();
-  } 
-  catch (error) {
-    res.status(500).json({ message: error.message });
+  async getReservations(req, res) {
+    try {
+      const reservations = await Reservation.find();
+      res.send(reservations);
+    } 
+    catch (error) {
+      res.status(500).json({ message: error.message });
+    }
   }
-});
 
-// Routes -----------------------------------------------
-module.exports = router;
+  async getReservationByName(req, res) {
+    try {
+      const reservation = await Reservation.find({ name: req.params.name });
+      if (!reservation)
+          return res.status(404).json({ message: 'Reservation not found' });
+      res.send(reservation[0]);
+    } 
+    catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  }
+
+  async updateReservation(req, res) {
+    try {
+      const reservation = await Reservation.findById(req.params.id);
+      if (!reservation)
+          return res.status(404).json({ message: 'Reservation not found' });
+      Object.assign(reservation, req.body);
+      await reservation.save();
+      res.send(reservation);
+    } 
+    catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  }
+
+  async deleteReservation(req, res) {
+    try {
+      await Reservation.deleteOne({ name: req.params.name });
+      res.status(204).json();
+    } 
+    catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  }
+}
+
+module.exports = new ReservationController().router;
