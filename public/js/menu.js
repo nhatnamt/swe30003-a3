@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 menuItemRow.appendChild(descriptionCell);
 
                 const priceCell = document.createElement('td');
-                priceCell.textContent = menuItem.price;
+                priceCell.textContent = `AU$${menuItem.price}`;
                 menuItemRow.appendChild(priceCell);
 
                 const categoryCell = document.createElement('td');
