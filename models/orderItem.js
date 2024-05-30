@@ -16,5 +16,6 @@ var orderItemSchema = new mongoose.Schema({
   }
 });
 
+// inherite from MenuItemSchema
 MenuItemSchema.discriminator('orderItem', orderItemSchema);
 module.exports = mongoose.model('orderItem');

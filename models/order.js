@@ -29,4 +29,16 @@ const orderSchema = new mongoose.Schema({
     }
 });
 
+// Method to calculate total amount
+orderSchema.methods.calculateTotalAmount = function() {
+    let totalAmount = 0;
+    const orderItems = this.orderItems;
+
+    for (const item of orderItems) {
+        totalAmount += item.price * item.quantity;
+    }
+
+    this.totalAmount = totalAmount;
+};
+
 module.exports = mongoose.model('Order', orderSchema);

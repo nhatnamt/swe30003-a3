@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
+const Order = require('../models/order');
+const orderSchema = Order.schema;
 
-// Define the schema for the Invoice
+// Invoice schema
 const invoiceSchema = new mongoose.Schema({
-    Order_Number: {
+    invoiceID: {
         type: String,
         required: true
     },
@@ -14,28 +16,28 @@ const invoiceSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    Customer_Name: {
+    customerName: {
         type: String,
     },
-    Customer_Email: {
+    customerEmail: {
         type: String,
     },
-    Customer_Contact_Number: {
+    customerPhone: {
         type: String,
     },
-    Order: {
-        type: Object,
+    order: {
+        type: [orderSchema],
         required: true
     },
-    GST: {
+    gst: {
         type: Number,
         required: true
     },
-    Sub_Total: {
+    subtotal: {
         type: Number,
         required: true
     },
-    Total_Payable: {
+    totalPayable: {
         type: Number,
         required: true
     },
@@ -44,7 +46,7 @@ const invoiceSchema = new mongoose.Schema({
     },
 });
 
-// Define a method to calculate GST, subtotal, and total
+// Method to calculate GST, subtotal, and total
 invoiceSchema.methods.calculateTotals = function() {
     const gstRate = 0.1; // Assuming GST rate is 10%
     const order = order.find({

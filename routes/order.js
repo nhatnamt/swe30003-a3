@@ -4,10 +4,6 @@ const Order = require('../models/order');
 const MenuItem = require('../models/menuItem');
 const OrderItem = require('../models/orderItem');
 
-// const OrderItem = require('../models/orderItem');
-// const MenuItem = require('../models/menuItem');
-
-
 // Create -----------------------------------------------
 router.post('/', async (req, res) => {
     try {
@@ -44,9 +40,8 @@ router.post('/', async (req, res) => {
         orderItems: orderItems,
         status: req.body.status,
         date: req.body.date,
-        totalAmount: totalAmount
       });
-      console.log(order);
+      order.calculateTotalAmount();
 
       await order.save();
       res.status(201).json({ message: 'Order created successfully', order });
@@ -79,6 +74,7 @@ router.get('/:status', async (req, res) => {
       res.status(500).json({ message: error.message });
     }
   });
+  
 // Update -----------------------------------------------
 // update order status
 router.patch('/:id', async (req, res) => {
