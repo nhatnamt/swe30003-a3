@@ -36,20 +36,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // submit order
     const submitButton = document.getElementById('submit');
     submitButton.addEventListener('click', async () => {
-        const id = document.getElementById('order-id');
         const tableNumber = document.getElementById('table-number');
         const status = "Pending";
         const date = new Date();
         const orderItems = [];
         const rows = orderTable.getElementsByTagName('tr');
-        for (let i = 0; i < rows.length; i++) {
-            const row = rows[i];
-            const id = row.querySelector('input[name="id"]').value;
+        for (let menuItem = 0; menuItem < rows.length; menuItem++) {
+            const row = rows[menuItem];
+            const menuItemId = row.querySelector('input[name="id"]').value;
             const quantity = row.querySelector('input[name="quantity"]').value;
             const notes = row.querySelector('input[name="notes"]').value;
-            orderItems.push({id, name, quantity, notes});
+            orderItems.push({id: menuItemId, quantity, notes});
         }
-        const order = {orderID: id.value, tableNumber: tableNumber.value, orderItems, status, date};
+        const order = {tableNumber: tableNumber.value, orderItems, status, date};
         await fetch('http://localhost:3000/api/orders', {
             method: 'POST',
             headers: {

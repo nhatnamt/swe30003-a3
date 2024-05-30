@@ -18,7 +18,7 @@ function loadPendingOrders() {
         .then(orders => {
             orders.forEach(order => {
                 pendingOrders.innerHTML += `
-                    <div class="card m-1" style="width: 18rem;">
+                    <div class="card" style="width: 18rem;">
                         <h5 class="card-header">Order ID: ${order.orderID}</h5>
                         <ul class="list-group list-group-flush">
                             ${order.orderItems.map(item => `
@@ -28,7 +28,7 @@ function loadPendingOrders() {
                             `).join('')}
                         </ul>
                         <div class="card-footer">
-                            <button type="button" class="btn btn-success btn-done">Mark Done</button>
+                            <button type="button" class="btn btn-primary btn-done">Mark Done</button>
                         </div>
                     </div>`;
             });

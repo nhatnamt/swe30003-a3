@@ -11,6 +11,7 @@ const OrderItem = require('../models/orderItem');
 // Create -----------------------------------------------
 router.post('/', async (req, res) => {
     try {
+      console.log(req.body);
       const orderItems = [];
       const items = req.body.orderItems;
       var totalAmount = 0;
@@ -20,8 +21,8 @@ router.post('/', async (req, res) => {
         if (!menuItems) {
           return res.status(400).json({ message: 'Invalid menu item' });
         }
-
         const menuItem = menuItems[0];
+        console.log(menuItems);
         const orderItem = new OrderItem({
           id: item.id,
           name: menuItem.name,
@@ -36,8 +37,9 @@ router.post('/', async (req, res) => {
         orderItems.push(orderItem);
       }
 
+      const orderID = await Order.countDocuments()+1;
       const order = new Order({
-        orderID: req.body.orderID,
+        orderID: orderID,
         tableNumber: req.body.tableNumber,
         orderItems: orderItems,
         status: req.body.status,
@@ -69,7 +71,7 @@ router.get('/', async (req, res) => {
 // get order by status
 router.get('/:status', async (req, res) => {
 
-    console.log(req.params.status);
+    //console.log(req.params.status);
     try {
       const orders = await Order.find({ status: req.params.status });
       res.send(orders);
