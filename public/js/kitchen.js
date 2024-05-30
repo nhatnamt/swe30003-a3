@@ -18,12 +18,13 @@ function loadPendingOrders() {
         .then(orders => {
             orders.forEach(order => {
                 pendingOrders.innerHTML += `
-                    <div class="card" style="width: 18rem;">
+                    <div class="card style="max-width: 18rem;">
                         <h5 class="card-header">Order ID: ${order.orderID}</h5>
                         <ul class="list-group list-group-flush">
                             ${order.orderItems.map(item => `
                                 <li class="list-group-item">
-                                    ${item.name} <span style="float: right;">x ${item.quantity}</span>
+                                    ${item.id}: ${item.name} 
+                                    <span style="float: right;">x ${item.quantity}</span>
                                 </li>
                             `).join('')}
                         </ul>

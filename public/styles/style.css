@@ -6,6 +6,10 @@
     font-size: 1.7em !important;
 }
 
+.card-columns {
+    column-count: 4 !important;
+}
+
 .text-done {
     color: green;
     background-color: rgba(185, 255, 218, 0.4);

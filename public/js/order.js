@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             body: JSON.stringify(order),
         });
+        location.reload();
     });
 
     // load recent orders
