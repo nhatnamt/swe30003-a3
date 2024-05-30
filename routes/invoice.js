@@ -1,82 +1,68 @@
 const express = require('express');
 const router = express.Router();
-const Invoice = require('../models/invoice');
-const Order = require('../models/order'); // Ensure you have an order model
+const Reservation = require('../models/invoice');
 
 // Create -----------------------------------------------
-// Fetch order details and create an invoice
-router.post('/create-from-order', async (req, res) => {
-  const { orderId } = req.body;
+router.post('/', async (req, res) => {
+  console.log(req.body);
   try {
-    const order = await Order.findOne({ orderID: orderId });
-    if (!order) {
-      return res.status(404).json({ message: 'Order not found' });
-    }
-
-    const invoiceData = {
-      orderID: order.orderID,
-      tableNumber: order.tableNumber,
-      orderItems: order.orderItems,
-      status: order.status,
-      date: order.date,
-      totalAmount: order.totalAmount,
-    };
-
-    const invoice = new Invoice(invoiceData);
-    await invoice.save();
-    res.status(201).json(invoice);
+    const reservation = new Reservation(req.body);
+    await reservation.save();
+    res.status(201).json(reservation);
   } 
   catch (error) {
     res.status(400).json({ message: error.message });
   }
 });
 
-// Get all invoices
+// Read ------------------------------------------------
+// get all invoices
 router.get('/', async (req, res) => {
   try {
-    const invoices = await Invoice.find();
-    res.send(invoices);
+    const reservations = await Reservation.find();
+    res.send(reservations);
   } 
   catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+    res.status(500).json({ message: error.message })
+  }});
 
-// Get invoice by name
+// get invoice by name
 router.get('/:name', async (req, res) => {
   try {
-    const invoice = await Invoice.find({ name: req.params.name });
-    if (!invoice)
-      return res.status(404).json({ message: 'Invoice not found' });
-    res.send(invoice);
+    const reservation = await Reservation.find({ name: req.params.name });
+    if (!reservation)
+        return res.status(404).json({ message: 'Invoice not found' });
+    res.send(reservation);
   } 
   catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-// Update by ID
+// Update -----------------------------------------------
+// update by id
 router.patch('/:id', async (req, res) => {
   try {
-    const invoice = await Invoice.findById(req.params.id);
-    if (!invoice)
-      return res.status(404).json({ message: 'Invoice not found' });
-    Object.assign(invoice, req.body);
-    await invoice.save();
-    res.send(invoice);
+    const reservation = await Reservation.findById(req.params.id);
+    if (!reservation)
+        return res.status(404).json({ message: 'Invoice not found' });
+    Object.assign(reservation, req.body);
+    await reservation.save();
+    res.send(reservation);
   } 
   catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-// Delete by ID
+// Delete -----------------------------------------------
+// delete by id
 router.delete('/:id', async (req, res) => {
   try {
-    const invoice = await Invoice.findById(req.params.id);
-    if (!invoice)
-      return res.status(404).json({ message: 'Invoice not found' });
-    await invoice.delete();
+    const reservation = await Reservation.findById(req.params.id);
+    if (!reservation)
+        return res.status(404).json({ message: 'Invoice not found' });
+    await reservation.delete();
     res.status(204).json();
   } 
   catch (error) {
@@ -84,4 +70,5 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// Routes -----------------------------------------------
 module.exports = router;

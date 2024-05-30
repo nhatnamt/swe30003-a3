@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Invoice</title>
+        <title>Order</title>
         <meta charset="UTF-8">
-        <meta name="description" content="Invoice">
+        <meta name="description" content="FOH">
         <meta name="keywords" content="RelaxingKoala">
         <link rel="stylesheet" href="styles/style.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     </head>
     <body>
         <nav class="navbar navbar-expand-lg bg-light py-3">
+            <!--navigation bar -->
             <h1 class="navbar-brand">Relaxing Koala</h1>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -27,15 +28,23 @@
             <h1>Create Invoice</h1>
         </div>
         <section class="">
-            <form id="Invoice-form">
+            <form id = "Invoice-form">
                 <label for="OrderNumber">Order Number: </label>
                 <input type="text" id="OrderNumber" name="OrderNumber" required><br><br>
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required><br><br>
+                <label for="time">Time:</label>
+                <input type="time" id="time" name="time" required><br><br>
+                <label for="CustomerName">Customer Name:</label>
+                <input type="text" id="CustomerName" name="CustomerName"><br><br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email"><br><br>
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone"><br><br>
                 <input class="submitButton" type="submit" value="Submit">
             </form>
-            <div id="invoice-details">
-                <!-- Invoice details will be displayed here -->
-            </div>
         </section>
-        <script src=".js/invoice.js"></script>
+        <script src="js/invoices.js"></script>
     </body>
-</html>
+    </html>
+        

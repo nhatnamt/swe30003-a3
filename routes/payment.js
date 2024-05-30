@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const Payment = require('../models/reservation');
+const Reservation = require('../models/payment');
 
 // Create -----------------------------------------------
 router.post('/', async (req, res) => {
   console.log(req.body);
   try {
-    const payment = new Payment(req.body);
-    await payment.save();
-    res.status(201).json(payment);
+    const reservation = new Reservation(req.body);
+    await reservation.save();
+    res.status(201).json(reservation);
   } 
   catch (error) {
     res.status(400).json({ message: error.message });
@@ -16,23 +16,23 @@ router.post('/', async (req, res) => {
 });
 
 // Read ------------------------------------------------
-// get all reservations
+// get all payment
 router.get('/', async (req, res) => {
   try {
-    const payment = await Payment.find();
-    res.send(payment);
+    const reservations = await Reservation.find();
+    res.send(reservations);
   } 
   catch (error) {
     res.status(500).json({ message: error.message })
   }});
 
-// get reservation by name
+// get payment by name
 router.get('/:name', async (req, res) => {
   try {
-    const payment = await Payment.find({ name: req.params.name });
-    if (!payment)
-        return res.status(404).json({ message: 'Reservation not found' });
-    res.send(payment);
+    const reservation = await Reservation.find({ name: req.params.name });
+    if (!reservation)
+        return res.status(404).json({ message: 'payment not found' });
+    res.send(reservation);
   } 
   catch (error) {
     res.status(500).json({ message: error.message });
@@ -43,12 +43,12 @@ router.get('/:name', async (req, res) => {
 // update by id
 router.patch('/:id', async (req, res) => {
   try {
-    const payment = await Payment.findById(req.params.id);
-    if (!payment)
-        return res.status(404).json({ message: 'Reservation not found' });
-    Object.assign(payment, req.body);
-    await payment.save();
-    res.send(payment);
+    const reservation = await Reservation.findById(req.params.id);
+    if (!reservation)
+        return res.status(404).json({ message: 'payment not found' });
+    Object.assign(reservation, req.body);
+    await reservation.save();
+    res.send(reservation);
   } 
   catch (error) {
     res.status(500).json({ message: error.message });
@@ -59,10 +59,10 @@ router.patch('/:id', async (req, res) => {
 // delete by id
 router.delete('/:id', async (req, res) => {
   try {
-    const payment = await Payment.findById(req.params.id);
-    if (!payment)
-        return res.status(404).json({ message: 'Reservation not found' });
-    await payment.delete();
+    const reservation = await Reservation.findById(req.params.id);
+    if (!reservation)
+        return res.status(404).json({ message: 'payment not found' });
+    await reservation.delete();
     res.status(204).json();
   } 
   catch (error) {
