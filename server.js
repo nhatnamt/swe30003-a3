@@ -43,6 +43,9 @@ app.use('/api/orders', orderRoutes);
 const menuRoutes = require('./routes/menu');
 app.use('/api/menu', menuRoutes);
 
+const invoiceRoutes = require('./routes/invoice');
+app.use('/api/invoices', invoiceRoutes);
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

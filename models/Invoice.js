@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Order = require('../models/order');
+const Order = require('./order');
 const orderSchema = Order.schema;
 
 // Invoice schema
