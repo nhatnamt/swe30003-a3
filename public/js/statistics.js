@@ -69,21 +69,50 @@ class FeedbackEntryForm extends DefaultEntryForm {
     }
 }
 
-// Bar chart
 class BarChart {
-    constructor(elementId, categories, series) {
-        this.chart = new ApexCharts(document.querySelector(`#${elementId}`), {
+    constructor(elementId,seriesName,color) {
+        this.elementId = elementId;
+        this.seriesName = seriesName;
+        this.color = color;
+        this.chart = null;
+    }
+
+    fetchData(url, transformData) {
+        fetch(url)
+            .then(response => response.json())
+            .then(orders => {
+                const data = transformData(orders);
+                const sortedData = Object.entries(data).sort((a, b) => b[1] - a[1]);
+                const categories = sortedData.map(item => item[0]);
+                const series = sortedData.map(item => item[1]);
+                this.createChart(categories, series);
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    createChart(categories, series) {
+        console.log(this.seriesName);
+        this.chart = new ApexCharts(document.querySelector(`#${this.elementId}`), {
             chart: {
                 type: 'bar',
                 height: 350,
                 horizontal: true,
             },
             series: [{
+                name: this.seriesName,
                 data: series
             }],
+            colors: [this.color],
             xaxis: {
                 categories: categories,
-            }
+            },
+            plotOptions: {
+                bar: {
+                    borderRadius: 4,
+                    borderRadiusApplication: 'end',
+                    horizontal: true,
+                }
+            },
         });
 
         this.chart.render();
@@ -94,7 +123,41 @@ document.addEventListener('DOMContentLoaded', () => {
     const feedbackEntryForm = new FeedbackEntryForm('feedback-form');
     const feedbackTableView = new FeedbackTableView('feedback-table', 'feedback-form');
 
-    const categories = ['Category 1', 'Category 2', 'Category 3'];
-    const series = [400, 430, 448];
-    const barChart = new BarChart('chart', categories, series);
+    const calculateItemCounts = orders => {
+        const itemCounts = {};
+    
+        for (const order of orders) {
+            for (const item of order.orderItems) {
+                const key = `${item.name}: ${item.id}`;
+                if (!itemCounts[key]) {
+                    itemCounts[key] = 0;
+                }
+                itemCounts[key]++;
+            }
+        }
+    
+        return itemCounts;
+    };
+    
+    const calculateItemSales = orders => {
+        const itemSales = {};
+    
+        for (const order of orders) {
+            for (const item of order.orderItems) {
+                const key = `${item.name}: ${item.id}`;
+                if (!itemSales[key]) {
+                    itemSales[key] = 0;
+                }
+                itemSales[key] += item.price;
+            }
+        }
+    
+        return itemSales;
+    };
+    
+    const orderChart = new BarChart('order-chart', 'Orders','#007BFF');
+    orderChart.fetchData('http://localhost:3000/api/orders',calculateItemCounts);
+
+    const salesChart = new BarChart('sales-chart', 'Sales (AU$)','#ff9d00');
+    salesChart.fetchData('http://localhost:3000/api/orders', calculateItemSales);
 });
