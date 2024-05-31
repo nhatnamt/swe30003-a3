@@ -31,14 +31,17 @@ const invoiceSchema = new mongoose.Schema({
     },
     gst: {
         type: Number,
+        default: 0,
         required: true
     },
     subtotal: {
         type: Number,
+        default: 0,
         required: true
     },
     totalPayable: {
         type: Number,
+        default: 0,
         required: true
     },
     message: {
