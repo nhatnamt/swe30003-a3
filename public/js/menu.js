@@ -1,6 +1,8 @@
 class MenuTableView extends DefaultTableView {
     constructor(tableId, formId) {
         super(tableId, formId, 'http://localhost:3000/api/menu');
+
+        this.table.addEventListener('click', this.handleTableClick.bind(this));
     }
 
     createTable() {
@@ -35,6 +37,27 @@ class MenuTableView extends DefaultTableView {
 
             this.tableBody.appendChild(row);
         });
+    }
+
+    async handleTableClick(event) {
+        const id = event.target.parentElement.parentElement.getElementsByTagName('td')[0].textContent;
+        if (event.target.classList.contains('btn_remove')) {
+            fetch(`http://localhost:3000/api/menu/${id}`, {
+                method: 'DELETE',
+            });
+        }
+        else if (event.target.classList.contains('btn_view')) {
+            // search by id through route
+            fetch(`http://localhost:3000/api/menu/${id}`)
+                .then(response => response.json())
+                .then(menuItem => {
+                    document.getElementById('id').value = menuItem.id;
+                    document.getElementById('name').value = menuItem.name;
+                    document.getElementById('price').value = menuItem.price;
+                    document.getElementById('description').value = menuItem.description;
+                    document.getElementById('category').value = menuItem.category;
+                });
+        }
     }
 }
 
@@ -76,6 +99,25 @@ class MenuEntryForm extends DefaultEntryForm{
         const category = document.getElementById('category').value;
         return {id, name, price, description, category};
     }
+
+    // async handleFormUpdate(event) {
+    //     event.preventDefault();
+    //     const id = document.getElementById('id').value;
+    //     const name = document.getElementById('name').value;
+    //     const price = document.getElementById('price').value;
+    //     const description = document.getElementById('description').value;
+    //     const category = document.getElementById('category').value;
+    //     const menuItem = {id, name, price, description, category};
+    //     await fetch(`http://localhost:3000/api/menu/${id}`, {
+    //         method: 'PATCH',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(menuItem),
+    //     });
+    //     // refresh the page
+    //     location.reload();
+    // }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

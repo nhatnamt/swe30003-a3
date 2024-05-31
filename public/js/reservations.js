@@ -4,8 +4,6 @@ class ReservationTableView extends DefaultTableView {
 
         // bind delete and view buttons
         this.table.addEventListener('click', this.handleTableClick.bind(this));
-        // hide update button
-        document.getElementById('btn-update').style.display = 'none';
     }
 
     createTable() {
@@ -72,6 +70,9 @@ class ReservationTableView extends DefaultTableView {
 class ReservationEntryForm extends DefaultEntryForm {
     constructor(formId) {
         super(formId, 'http://localhost:3000/api/reservations');
+
+        // hide update button
+        document.getElementById('btn-update').style.display = 'none';
     }
 
     createForm() {

@@ -10,6 +10,8 @@ class MenuController {
   initializeRoutes() {
     this.router.post('/', this.createMenuItem.bind(this));
     this.router.get('/', this.getAllMenuItems.bind(this));
+    this.router.get('/:id', this.getMenuItem.bind(this));
+    this.router.patch('/:id', this.updateMenuItem.bind(this));
   }
 
   async createMenuItem(req, res) {
@@ -30,6 +32,44 @@ class MenuController {
       res.send(items);
     } catch (error) {
       res.status(500).json({ message: error.message });
+    }
+  }
+
+  async getMenuItem(req, res) {
+    try {
+      const item = await MenuItem.findOne({ id: req.params.id });
+      if (item == null) {
+        return res.status(404).json({ message: 'Cannot find menu item' });
+      }
+      res.json(item);
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  }
+
+  async updateMenuItem(req, res) {
+    try {
+      console.log(req.body);
+      const item = await MenuItem.findOne({ id: req.params.id });
+      if (item == null) {
+        return res.status(404).json({ message: 'Cannot find menu item' });
+      }
+      if (req.body.name != null) {
+        item.name = req.body.name;
+      }
+      if (req.body.price != null) {
+        item.price = req.body.price;
+      }
+      if (req.body.description != null) {
+        item.description = req.body.description;
+      }
+      if (req.body.category != null) {
+        item.category = req.body.category;
+      }
+      await item.save();
+      res.json(item);
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
     }
   }
 }

@@ -92,8 +92,9 @@ class DefaultEntryForm {
 
     async handleUpdate(event) {
         event.preventDefault();
+        const updateRoute = this.route + '/' + this.form.querySelector('#id').value;
         const data = this.getData();
-        const response = await fetch(this.route, {
+        const response = await fetch(updateRoute, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

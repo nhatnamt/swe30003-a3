@@ -36,6 +36,9 @@ class FeedbackTableView extends DefaultTableView {
 class FeedbackEntryForm extends DefaultEntryForm {
     constructor(formId) {
         super(formId, 'http://localhost:3000/api/feedbacks');
+
+        // hide update button
+        document.getElementById('btn-update').style.display = 'none';
     }
 
     createForm() {
