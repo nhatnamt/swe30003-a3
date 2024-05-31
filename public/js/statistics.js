@@ -98,7 +98,7 @@ class BarChart {
         this.chart = new ApexCharts(document.querySelector(`#${this.elementId}`), {
             chart: {
                 type: 'bar',
-                height: 350,
+                height: 450,
                 horizontal: true,
             },
             series: [{
