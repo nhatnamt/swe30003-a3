@@ -1,6 +1,7 @@
 class InvoiceTableView extends DefaultTableView {
     constructor(tableId, formId, url, paymentModal) {
         super(tableId, formId, url);
+        this.paymentModal = paymentModal;
         this.table.addEventListener('click', this.handleTableClick.bind(this));
 
     }
@@ -79,10 +80,12 @@ class InvoiceTableView extends DefaultTableView {
             });
         }
         else if (event.target.classList.contains('btn_pay')) {
-            paymentModal.show();
-            // const invoiceID = event.target.parentElement.parentElement.getElementsByTagName('td')[0].textContent;
-            // var paidAmount = event.target.parentElement.parentElement.getElementsByTagName('td')[10].textContent;
-            // var totalPayable = event.target.parentElement.parentElement.getElementsByTagName('td')[9].textContent;
+            const invoiceID = event.target.parentElement.parentElement.getElementsByTagName('td')[0].textContent;
+            var totalPaid = event.target.parentElement.parentElement.getElementsByTagName('td')[10].textContent;
+            var totalPayable = event.target.parentElement.parentElement.getElementsByTagName('td')[9].textContent;
+            this.paymentModal.setDetails(invoiceID, totalPayable, totalPaid);
+            this.paymentModal.show();
+
             // // remove the AU$ prefix
             // paidAmount = parseFloat(paidAmount.substring(3));
             // totalPayable = parseFloat(totalPayable.substring(3));
@@ -154,111 +157,9 @@ class InvoiceEntryForm extends DefaultEntryForm {
         return {orderNumber, date, time, customerName,customerEmail,customerPhone, message};
     }
 }
-class PaymentModal {
-    constructor() {
-        this.invoiceID = 0;
-        this.totalPayable = 0;
-        this.totalPaid = 0;
-        this.createModelCont();
-        this.createDefaultBody();
-    }
 
-    setDetails(invoiceID, totalPayable, totalPaid) {
-        this.invoiceID = invoiceID;
-        this.totalPayable = totalPayable;
-        this.totalPaid = totalPaid;
-    }
-
-    show() {
-        $('#payment-modal').modal();
-    }
-
-    createModelCont() {
-        const modalCont = document.createElement('div');
-        modalCont.classList.add('modal');
-        modelCont.id = 'payment-modal';
-        modelCont.innerHTML = `
-
-        <div class="modal-dialog">
-        <div class="modal-content">
-    
-            <div class="modal-header">
-            <h4 class="modal-title text">Payment Method</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-    
-            <!-- Modal body -->
-            <div class="modal-body">
-            </div>
-    
-        </div>
-        </div>
-        `;
-    }
-    
-    createDefaultBody() {
-        const modalBody = document.querySelector('.modal-body');
-        modalBody.innerHTML = `
-            <span>Outstanding Amount: </span><span id="outstanding-amount"></span>
-            <div class="row mt-3">
-                <div class="col">
-                    <button type="button" class="btn btn-primary btn-block" id="cash">Cash</button>
-                </div>
-                <div class="col">
-                    <button type="button" class="btn btn-secondary btn-block" id="card">Card</button>
-                </div>
-            </div>
-        `;
-    }
-
-    createCashBody() {
-        const modalBody = document.querySelector('.modal-body');
-        modalBody.innerHTML = `
-            <div>
-                <h4>Cash Payment</h4>
-                <p>Enter the amount received</p>
-                <input type="number" id="cashPaymentAmount" min="0">
-                <button type="button" class="btn btn-primary" id="submitCashPayment">Submit</button>
-            </div>
-        `;
-    }
-
-    createCardBody() {
-        const modalBody = document.querySelector('.modal-body');
-        modalBody.innerHTML = `
-            <div>
-                <h4>Card Payment</h4>
-                <p>Enter the card details</p>
-                <input type="text" id="cardNumber" placeholder="Card Number">
-                <input type="text" id="cardExpiry" placeholder="Expiry Date">
-                <input type="text" id="cardCVC" placeholder="CVC">
-                <button type="button" class="btn btn-primary" id="submitCardPayment">Submit</button>
-            </div>
-        `;
-    }
-
-}
 document.addEventListener('DOMContentLoaded', () => {
     const paymentModal = new PaymentModal();
     const invoiceForm = new InvoiceEntryForm('invoice-form');
     const invoiceTable = new InvoiceTableView('invoice-table', 'invoice-form', 'http://localhost:3000/api/invoices', paymentModal);
-
-    // // Handle the Cash button click
-    // document.querySelector('#cash').addEventListener('click', function() {
-    //     // Handle cash payment
-    //     document.querySelector('.modal-body').innerHTML = `
-    //         <div>
-    //             <h4>Cash Payment</h4>
-    //             <p>Enter the amount received</p>
-    //             <input type="number" id="cashPaymentAmount" min="0">
-    //             <button type="button" class="btn btn-primary" id="submitCashPayment">Submit</button>
-    //         </div>
-    //     `;
-    // });
-
-    // // Handle the Card button click
-    // document.querySelector('#card').addEventListener('click', function() {
-    //     // Handle card payment
-    //     $('#myModal').modal('hide');
-    // });
 });

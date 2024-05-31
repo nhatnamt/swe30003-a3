@@ -11,9 +11,8 @@ class InvoiceController {
   initializeRoutes() {
     this.router.post('/', this.createInvoice.bind(this));
     this.router.get('/', this.getInvoices.bind(this));
-    //this.router.get('/:id', this.getInvoiceById.bind(this));
-    //this.router.patch('/:id', this.updateInvoice.bind(this));
-    //this.router.delete('/:id', this.deleteInvoice.bind(this));
+    this.router.patch('/:id', this.updateInvoice.bind(this));
+    this.router.delete('/:id', this.deleteInvoice.bind(this));
   }
   
   async createInvoice(req, res) {
@@ -54,7 +53,41 @@ class InvoiceController {
       res.status(500).json({ message: 'Internal server error' });
     }
   }
+
+  async updateInvoice(req, res) {
+    try {
+      const { paymentAmount } = req.body;
+      const invoice = await Invoice.findOneAndUpdate(
+        {invoiceID: req.params.id},
+        { invoiceID: req.params.id },
+        { $inc: { paymentAmount: paymentAmount } },
+        { new: true }
+      );
+      
+      if (!invoice)
+        return res.status(404).json({ message: 'Invoice not found' });
+
+      res.json(invoice);
+
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  }
+
+  async deleteInvoice(req, res) {
+    try {
+      await Invoice.deleteOne({invoiceID: req.params.id});
+      res.json({ message: 'Invoice deleted successfully' });
+    }
+    catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  }  
 }
+
+
 
 
 module.exports = new InvoiceController().router;
