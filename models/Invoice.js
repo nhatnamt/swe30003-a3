@@ -47,6 +47,11 @@ const invoiceSchema = new mongoose.Schema({
     message: {
         type: String,
     },
+    status: {
+        type: String,
+        default: 'Unpaid',
+        required: true
+    }
 });
 
 // Method to calculate subtotal

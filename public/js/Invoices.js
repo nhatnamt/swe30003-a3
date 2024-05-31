@@ -18,7 +18,7 @@ class InvoiceTableView extends DefaultTableView {
                 <th>GST</th>
                 <th>Total Payable</th>
                 <th>Message</th>
-                <th>Actions</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -46,10 +46,18 @@ class InvoiceTableView extends DefaultTableView {
             row.innerHTML += `<td>${invoice.totalPayable}</td>`;
             row.innerHTML += `<td>${invoice.message}</td>`;
 
-            const actionButton = document.createElement('td');
-            actionButton.innerHTML = '<button type="button" class="btn btn-primary btn_view btn-sm mr-1">View</button>';
-            actionButton.innerHTML += '<button type="button" class="btn btn-danger btn_remove btn-sm">X</button>';
-            row.appendChild(actionButton);
+            const statusCell = document.createElement('td');
+            const status = document.createElement('span');
+
+            status.textContent = invoice.status;
+            if (invoice.status === 'Unpaid') {
+                status.classList.add('text-pending');
+            }
+            else if (invoice.status === 'Paid') {
+                status.classList.add('text-done');
+            }
+            statusCell.appendChild(status);
+            row.appendChild(statusCell);
 
             this.tableBody.appendChild(row);
         });

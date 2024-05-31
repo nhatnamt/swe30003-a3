@@ -31,6 +31,10 @@ class DefaultTableView {
     updateTable() {
         throw new Error('You have to implement the method updateTable!');
     }
+
+    createActionButton() {
+        throw new Error('You have to implement the method createActionButton!');
+    }
 }
 
 class DefaultEntryForm {
