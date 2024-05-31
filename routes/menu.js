@@ -12,11 +12,12 @@ class MenuController {
     this.router.get('/', this.getAllMenuItems.bind(this));
     this.router.get('/:id', this.getMenuItem.bind(this));
     this.router.patch('/:id', this.updateMenuItem.bind(this));
+    this.router.delete('/:id', this.deleteMenuItem.bind(this));
   }
 
   async createMenuItem(req, res) {
     try {
-      console.log(req.body);
+      // do
       const item = new MenuItem(req.body);
       console.log(item);
       await item.save();
@@ -70,6 +71,15 @@ class MenuController {
       res.json(item);
     } catch (error) {
       return res.status(500).json({ message: error.message });
+    }
+  }
+
+  async deleteMenuItem(req, res) {
+    try {
+      await MenuItem.deleteOne({ id: req.params.id });
+      res.status(204).json();
+    } catch (error) {
+      res.status(500).json({ message: error.message });
     }
   }
 }

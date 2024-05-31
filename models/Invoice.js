@@ -6,7 +6,8 @@ const orderSchema = Order.schema;
 const invoiceSchema = new mongoose.Schema({
     invoiceID: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     date: {
         type: Date,

@@ -44,6 +44,9 @@ class MenuTableView extends DefaultTableView {
         if (event.target.classList.contains('btn_remove')) {
             fetch(`http://localhost:3000/api/menu/${id}`, {
                 method: 'DELETE',
+            })
+            .then(() => {
+                location.reload();
             });
         }
         else if (event.target.classList.contains('btn_view')) {
