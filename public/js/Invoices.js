@@ -41,9 +41,9 @@ class InvoiceTableView extends DefaultTableView {
             row.innerHTML += `<td>${invoice.customerName}</td>`;
             row.innerHTML += `<td>${invoice.customerEmail}</td>`;
             row.innerHTML += `<td>${invoice.customerPhone}</td>`;
-            row.innerHTML += `<td>${invoice.subtotal}</td>`;
-            row.innerHTML += `<td>${invoice.gst}</td>`;
-            row.innerHTML += `<td>${invoice.totalPayable}</td>`;
+            row.innerHTML += `<td>AU$${invoice.subtotal}</td>`;
+            row.innerHTML += `<td>AU$${invoice.gst}</td>`;
+            row.innerHTML += `<td>AU$${invoice.totalPayable}</td>`;
             row.innerHTML += `<td>${invoice.message}</td>`;
 
             const statusCell = document.createElement('td');
@@ -51,7 +51,7 @@ class InvoiceTableView extends DefaultTableView {
 
             status.textContent = invoice.status;
             if (invoice.status === 'Unpaid') {
-                status.classList.add('text-pending');
+                status.classList.add('text-error');
             }
             else if (invoice.status === 'Paid') {
                 status.classList.add('text-done');
