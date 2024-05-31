@@ -1,5 +1,5 @@
 const express = require('express');
-const Invoice = require('../models/invoice');
+const Invoice = require('../models/Invoice');
 const Order = require('../models/order');
 
 class InvoiceController {

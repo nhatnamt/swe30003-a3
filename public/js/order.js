@@ -3,6 +3,21 @@ class OrderTableView extends DefaultTableView {
         super(tableId, formId, 'http://localhost:3000/api/orders');
     }
 
+    createTable() {
+        this.table.innerHTML = `
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Table Number</th>
+                <th>Total Amount</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+        `;
+    }
+
     updateTable() {
         this.data.forEach(order => {
             const row = document.createElement('tr');
@@ -24,7 +39,7 @@ class OrderTableView extends DefaultTableView {
             orderStatusCell.appendChild(orderStatus);
             row.appendChild(orderStatusCell);
 
-            this.table.appendChild(row);
+            this.tableBody.appendChild(row);
         });
     }
 
@@ -92,34 +107,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const orderTableView = new OrderTableView('recent-orders', 'order-form');
-    
-    // // load recent orders
-    // const recentOrders = document.getElementById('recent-orders');
-    // fetch('http://localhost:3000/api/orders')
-    //     .then(response => response.json())
-    //     .then(orders => {
-    //         orders.forEach(order => {
-    //             const orderRow = document.createElement('tr');
-    //             orderRow.innerHTML = `<td>${order.orderID}</td>`;
-    //             orderRow.innerHTML += `<td>${order.tableNumber}</td>`;
-    //             orderRow.innerHTML += `<td>AU$${order.totalAmount}</td>`;
-    //             orderRow.innerHTML += `<td>${order.date}</td>`;
-
-    //             const orderStatusCell = document.createElement('td');
-    //             const orderStatus = document.createElement('span');
-
-    //             orderStatus.textContent = order.status;
-    //             if (order.status === 'Pending') {
-    //                 orderStatus.classList.add('text-pending');
-    //             }
-    //             else if (order.status === 'Done') {
-    //                 orderStatus.classList.add('text-done');
-    //             }
-    //             orderStatusCell.appendChild(orderStatus);
-    //             orderRow.appendChild(orderStatusCell);
-
-    //             recentOrders.appendChild(orderRow);
-    //         });
-    //     });
 });
 
