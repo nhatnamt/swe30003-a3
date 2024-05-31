@@ -3,15 +3,19 @@ const mongoose = require('mongoose');
 const feedbackSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        default: 'Anonymous',
     },
     email: {
         type: String,
-        required: true
+        default: 'Anonymous',
     },
     phone: {
         type: String,
-        required: true
+        default: 'Anonymous',
+    },
+    date: {
+        type: Date,
+        default: Date.now,
     },
     message: {
         type: String,

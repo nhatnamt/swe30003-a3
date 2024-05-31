@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Invoice</title>
+        <title>Statistics</title>
         <meta charset="UTF-8">
         <meta name="description" content="FOH">
         <meta name="keywords" content="RelaxingKoala">
         <link rel="stylesheet" href="styles/style.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
         <script src="js/default.js"></script>
-        <script src="js/payment.js"></script>
-        <script src="js/invoices.js"></script>
+        <script src="js/statistics.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg bg-light py-3">
@@ -32,21 +30,28 @@
                 </li>
             </ul>
         </nav>
-        <div class="container mt-5 p-4 bg-light rounded w-50">
-            <header class="text-center mb-3">
-                <h2 class="">Create Invoice</h2>
-            </header>
-            <form id="invoice-form">
-            </form>
+        <div class="container-fluid mt-5 w-75 mx-auto bg-light rounded">
+            <h2 class="text-center">Revenue and Order Statistics</h2>
+            <div id="chart"></div>
         </div>
-
-        <div class="container mt-5 p-4 bg-light rounded" style="max-width: 90%;">
-            <header class="text-center mb-3">
-                <h2 class="">Recent Invoices</h2>
-            </header>
-            <table id="invoice-table" class="table table-bordered">
-            </table>
+        <div class="container-fluid w-75 mx-auto">
+            <div class="row">
+                <div class="mt-4 p-4 bg-light rounded col-4 float-left h-100">
+                    <h2>Leave a Feedback</h2>
+                    <p class="fst-italic text-muted">Leave a feedback for Relaxing Koala and help us improve our services. 
+                        Whether you're planning a romantic dinner for two, a family celebration, or a business lunch, we look forward to welcoming you. 
+                        Please fill out the form below to make a reservation. Only for Testing purposes.
+                    </p>
+                    <form id = "feedback-form">
+                    </form>
+                </div>
+                <div class="mt-4 ml-3 p-4 bg-light rounded col float-left h-100">
+                    <h2 class="text-center mb-3">Feedback List</h2>
+                    <table id="feedback-table" class="table table-bordered">
+                    </table>
+                </div>
+            </div>
         </div>
     </body>
-</html>
+    </html>
         

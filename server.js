@@ -46,6 +46,9 @@ app.use('/api/menu', menuRoutes);
 const invoiceRoutes = require('./routes/invoice');
 app.use('/api/invoices', invoiceRoutes);
 
+const feedbackRoutes = require('./routes/feedback');
+app.use('/api/feedbacks', feedbackRoutes);
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
