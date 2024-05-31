@@ -56,16 +56,16 @@ class InvoiceController {
 
   async updateInvoice(req, res) {
     try {
+      console.log(req.body);
       const { paymentAmount } = req.body;
-      const invoice = await Invoice.findOneAndUpdate(
-        {invoiceID: req.params.id},
-        { invoiceID: req.params.id },
-        { $inc: { paymentAmount: paymentAmount } },
-        { new: true }
-      );
-      
+      // find invoice, add payment amount to amountPaid, update status
+      const invoice = await Invoice.findOne({invoiceID: req.params.id});
       if (!invoice)
         return res.status(404).json({ message: 'Invoice not found' });
+      console.log(invoice);
+      invoice.amountPaid += Number(paymentAmount);
+      invoice.status = invoice.amountPaid >= invoice.totalPayable ? 'Paid' : 'Unpaid';
+      await invoice.save();
 
       res.json(invoice);
 

@@ -64,8 +64,8 @@ class PaymentModal {
         `;
 
         // Handle the button click
-        document.querySelector('#cash').addEventListener('click', this.createCashBody);
-        document.querySelector('#card').addEventListener('click', this.createCardBody);
+        document.querySelector('#cash').addEventListener('click', this.createCashBody.bind(this));
+        document.querySelector('#card').addEventListener('click', this.createCardBody.bind(this));
  
     }
 
@@ -75,16 +75,16 @@ class PaymentModal {
             <div>
                 <h4>Cash Payment</h4>
                 <p>Enter the payment details</p>
-                <form>
+                <form id="cash-payment">
                     <div class="form-group">
                         <label for="payment-amount">Payment Amount</label>
-                        <input type="number" class="form-control" id="payment-amount" placeholder="Payment Amount">
+                        <input type="number" class="form-control" id="payment-amount" placeholder="Payment Amount" required>
                     </div>
                     <button type="button" class="btn btn-primary" id="submit-cash-payment">Submit</button>
                 </form>
             </div>
         `;
-        document.getElementById('submit-cash-payment').addEventListener('click', this.handlePaymentSubmit);
+        document.querySelector('#submit-cash-payment').addEventListener('click', this.handlePaymentSubmit.bind(this));
     }
 
     createCardBody() {
@@ -116,16 +116,14 @@ class PaymentModal {
                 </form>
             </div>
         `;
-        const submitButton = document.getElementById('submit-card-payment');
-        submitButton.addEventListener('click', this.handlePaymentSubmit);
+        document.querySelector('#submit-card-payment').addEventListener('click', this.handlePaymentSubmit.bind(this));
     }
 
     handlePaymentSubmit() {
         const paymentAmount = document.getElementById('payment-amount').value;
-        console.log(paymentAmount);
 
         fetch(`http://localhost:3000/api/invoices/${this.invoiceID}`, {
-            method: 'PUT',
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -133,7 +131,7 @@ class PaymentModal {
         })
         .then(response => {
             if (response.ok) {
-                $('#payment-modal').modal('hide');
+                location.reload();
             }
         });
     }
